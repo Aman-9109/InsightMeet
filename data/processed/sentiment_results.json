@@ -1,0 +1,14 @@
+{
+    "chunk_results": [
+        {
+            "chunk_id": 0,
+            "label": "NEGATIVE",
+            "score": 0.9847255349159241
+        }
+    ],
+    "overall": {
+        "overall_sentiment": "NEGATIVE",
+        "positive_chunks": 0,
+        "negative_chunks": 1
+    }
+}
