@@ -1,11 +1,14 @@
 import re
 import nltk
+import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import stopwords
 
 # Make sure required NLTK data is available
 nltk.download("punkt", quiet=True)
 nltk.download("stopwords", quiet=True)
+nltk.download("punkt")
+nltk.download("stopwords")
 
 
 class TextPreprocessor:
