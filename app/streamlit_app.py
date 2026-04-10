@@ -3,9 +3,7 @@ import os
 import sys
 import matplotlib.pyplot as plt
 
-# ----------------------------
-# Model Caching
-# ----------------------------
+
 
 @st.cache_resource
 def load_transcriber():
@@ -28,14 +26,14 @@ st.sidebar.write("Model Size: base")
 st.sidebar.write("Topics: 2")
 st.sidebar.write("Keywords per Topic: 5")
 
-# ---- Fix import path ----
+
 current_dir = os.path.dirname(__file__)
 project_root = os.path.abspath(os.path.join(current_dir, ".."))
 
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-# ---- Import Modules ----
+
 from src.transcription import Transcriber
 from src.preprocessing import TextPreprocessor
 from src.chunking import TextChunker
@@ -44,7 +42,7 @@ from src.sentiment import SentimentAnalyzer
 from src.action_items import ActionItemExtractor
 from src.topic_modeling import TopicModeler
 
-# ---- Streamlit Config ----
+
 st.set_page_config(page_title="Meeting Insights Pipeline", layout="wide")
 
 st.title("📊 Meeting Insights Pipeline")
@@ -63,9 +61,6 @@ if uploaded_file is not None:
     st.success("File uploaded successfully ✅")
     st.audio(file_path)
 
-    # ----------------------------
-    # Transcription
-    # ----------------------------
     st.header("🎤 Transcription")
 
     with st.spinner("Transcribing audio..."):
@@ -74,18 +69,14 @@ if uploaded_file is not None:
 
     st.text_area("Transcript", transcript, height=200)
 
-    # ----------------------------
-    # Preprocessing + Chunking
-    # ----------------------------
+ 
     processor = TextPreprocessor()
     cleaned_text = processor.full_preprocess(transcript)
 
     chunker = TextChunker(max_words=200)
     chunks = chunker.create_chunks(cleaned_text)
 
-    # ----------------------------
-    # Summary
-    # ----------------------------
+  
     st.header("📄 Meeting Summary")
 
     with st.spinner("Generating summary..."):
@@ -96,9 +87,7 @@ if uploaded_file is not None:
 
     st.success(final_summary)
 
-    # ----------------------------
-    # Sentiment Analysis
-    # ----------------------------
+   
     st.header("😊 Sentiment Analysis")
 
     analyzer = load_sentiment()
@@ -125,9 +114,7 @@ if uploaded_file is not None:
 
     st.pyplot(fig)
 
-    # ----------------------------
-    # Action Items
-    # ----------------------------
+ 
     st.header("📌 Action Items & Decisions")
 
     extractor = ActionItemExtractor()
@@ -151,9 +138,7 @@ if uploaded_file is not None:
         else:
             st.info("No decisions detected")
 
-    # ----------------------------
-    # Topic Modeling
-    # ----------------------------
+
     st.header("📊 Topics & Keywords")
 
     topic_modeler = load_topic_modeler()
